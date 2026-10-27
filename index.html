@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>DJI Osmo Action 4 · 交互式 3D 拆解可视化</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- 3D 画布容器 -->
+  <div id="canvasWrap"></div>
+  <div class="vignette"></div>
+  <div class="scanlines"></div>
+
+  <!-- 部件标注层 -->
+  <div id="labels"></div>
+
+  <!-- 顶栏 -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <div>
+        <h1>DJI Osmo Action 4 <span>· 3D 拆解</span></h1>
+        <p>Interactive Exploded View · 纯代码程序化建模 · Three.js</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button id="btnExplode" class="btn primary"><span class="ico">⛓</span> 拆解全部</button>
+      <button id="btnAuto" class="btn"><span class="ico">↻</span> 自动旋转</button>
+      <button id="btnLabels" class="btn is-on"><span class="ico">◈</span> 显示标注</button>
+      <button id="btnReset" class="btn"><span class="ico">⌖</span> 重置视角</button>
+    </div>
+  </header>
+
+  <!-- 左侧：部件清单 + 整机规格 -->
+  <aside class="panel panel-left">
+    <div class="panel-head">
+      <h2>部件清单</h2>
+      <span class="count" id="partCount">10</span>
+    </div>
+    <ul class="part-list" id="partList"></ul>
+
+    <div class="panel-head sub">
+      <h2>整机规格</h2>
+    </div>
+    <ul class="spec-list" id="specSummary"></ul>
+  </aside>
+
+  <!-- 右侧：部件详情 -->
+  <aside class="panel panel-right" id="detailPanel"></aside>
+
+  <!-- 状态角标 -->
+  <div class="status-chip" id="statusChip"></div>
+
+  <!-- 底部操作引导 -->
+  <footer class="hintbar">
+    <span class="hint"><kbd>左键拖动</kbd> 旋转</span>
+    <span class="hint"><kbd>滚轮</kbd> 缩放</span>
+    <span class="hint"><kbd>右键拖动</kbd> 平移</span>
+    <span class="hint"><kbd>单击部件</kbd> 查看详情</span>
+    <span class="hint"><kbd>空格</kbd> 拆解 / 合体</span>
+    <span class="hint"><kbd>R</kbd> 重置</span>
+    <span class="hint"><kbd>L</kbd> 标注</span>
+    <span class="hint"><kbd>Esc</kbd> 取消选中</span>
+  </footer>
+
+  <!-- 加载层 -->
+  <div class="loading" id="loading">
+    <div class="box">
+      <div class="spinner"></div>
+      <p>正在程序化生成 Action 4 模型…</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Three.js 与示例模块（全部本地，离线可用） -->
+<script src="lib/three.min.js"></script>
+<script src="lib/OrbitControls.js"></script>
+<script src="lib/BufferGeometryUtils.js"></script>
+<script src="lib/shaders/CopyShader.js"></script>
+<script src="lib/shaders/LuminosityHighPassShader.js"></script>
+<script src="lib/postprocessing/EffectComposer.js"></script>
+<script src="lib/postprocessing/Pass.js"></script>
+<script src="lib/postprocessing/RenderPass.js"></script>
+<script src="lib/postprocessing/ShaderPass.js"></script>
+<script src="lib/postprocessing/MaskPass.js"></script>
+<script src="lib/postprocessing/UnrealBloomPass.js"></script>
+
+<!-- 应用 -->
+<script src="js/parts-data.js"></script>
+<script src="js/build-model.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
